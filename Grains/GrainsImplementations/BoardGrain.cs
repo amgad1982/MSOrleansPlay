@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data;
@@ -31,6 +32,16 @@ namespace Grains.GrainsImplementations
         public Task<IList<Board>> GetAllBoards()
         {
             return Task.Run(() => _tBoardRepository.Find());
+        }
+
+        public Task<Board> FindById(Guid id)
+        {
+            return Task.Run(() => _tBoardRepository.Find(x => x.Id == id).FirstOrDefault());
+        }
+
+        public Task UpdateBoard(Board board)
+        {
+            return Task.Run(() => _tBoardRepository.Update(board));
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Data.Repositories
 {
@@ -38,6 +39,9 @@ namespace Data.Repositories
 
         public void Update(Board entity)
         {
+            var old = _ctx.ChangeTracker.Entries<Board>().FirstOrDefault(e => e.Entity.Id == entity.Id);
+            var original = old?.OriginalValues.ToObject();
+            entity.UpdatedOriginal = JsonConvert.SerializeObject(original);
             _ctx.Set<Board>().Update(entity);
             _ctx.SaveChanges();
         }

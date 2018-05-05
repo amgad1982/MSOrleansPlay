@@ -11,7 +11,7 @@ namespace Data.Contexts
         public AppSqlContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppSqlContext>();
-            optionsBuilder.UseSqlServer("Server=AMGAD-WIN-NB\\SQLEXPRESS;Database=BackendDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=BackendDb;uid=sa;pwd=get@get1;");
 
             return new AppSqlContext(optionsBuilder.Options);
         }

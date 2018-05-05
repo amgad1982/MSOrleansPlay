@@ -11,5 +11,7 @@ namespace Grains.GrainsContracts
     {
         Task CreateBoard(string header);
         Task<IList<Board>> GetAllBoards();
+        Task<Board> FindById(Guid id);
+        Task UpdateBoard(Board board);
     }
 }

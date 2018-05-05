@@ -40,9 +40,13 @@ namespace ApiClient.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("{bid}")]
+        public async void Put(Guid bid, [FromBody]string boardHead)
         {
+            var client = _client.GetGrain<IBoardGrain>(Guid.Empty);
+            var board = await client.FindById(bid);
+            board.BoardHeader = boardHead;
+            await client.UpdateBoard(board);
         }
 
         // DELETE api/values/5
